@@ -1,7 +1,7 @@
 import QtQuick 2.6
 import QtQuick.Window 2.2
-import QtBluetooth 5.2
 import QtQuick.Controls 1.4
+import QtBluetooth 5.2
 import Ossia 1.0 as Ossia
 
 Window {
@@ -26,9 +26,12 @@ Window {
     }
 
     onMessageChanged: {
-        console.log(message);
-        socket.stringData = message;
-        console_logger.append("From OSC: " + message);
+        if(message != "")
+        {
+            socket.stringData = message;
+            console_logger.append("From OSC: " + message);
+            message = "";
+        }
     }
 
     /*BluetoothService {
@@ -156,7 +159,7 @@ Window {
         height: 26
         text: "clear"
         onClicked: {
-            console_logger.clear();
+            console_logger.text = ""
         }
     }
 
